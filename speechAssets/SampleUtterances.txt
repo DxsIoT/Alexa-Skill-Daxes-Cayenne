@@ -1,0 +1,6 @@
+HelloIntent Hello
+ChannelIntent status for channel {channel}
+ChannelIntent channel {channel} status
+ConnectIntent Connect
+ChannelOnIntent Switch on channel {channel}
+ChannelOffIntent Switch off channel {channel}

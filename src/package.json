@@ -1,0 +1,31 @@
+{
+  "name": "Daxes-Cayenne-Alexa-Skill",
+  "version": "1.0.0",
+  "description": "Sample skill for Cayenne Connection",
+  "main": "index.js",
+  "dependencies": {
+    "alexa-app": "^3.2.0",
+    "cayenne-mqtt": "^1.0.3",
+    "dotenv": "^4.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DXSIoT/Alexa-Skill-Daxes-Cayenne.git"
+  },
+  "keywords": [
+    "cayenne",
+    "mqtt",
+    "alexa",
+    "amazon"
+  ],
+  "author": "Laurence HR (http://daxes.net/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DXSIoT/Alexa-Skill-Daxes-Cayenne/issues"
+  },
+  "homepage": "https://github.com/DXSIoT/Alexa-Skill-Daxes-Cayenne#readme"
+}

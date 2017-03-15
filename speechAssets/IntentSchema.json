@@ -1,0 +1,39 @@
+{
+  "intents": [
+    {
+      "intent": "ChannelIntent",
+      "slots": [
+        {
+          "name": "channel",
+          "type": "AMAZON.NUMBER"
+        }
+      ]
+    },
+    {
+      "intent": "ChannelOnIntent",
+      "slots": [
+        {
+          "name": "channel",
+          "type": "AMAZON.NUMBER"
+        }
+      ]
+    },
+    {
+      "intent": "ChannelOffIntent",
+      "slots": [
+        {
+          "name": "channel",
+          "type": "AMAZON.NUMBER"
+        }
+      ]
+    },
+    {
+      "intent": "HelloIntent",
+      "slots": []
+    },
+    {
+      "intent": "ConnectIntent",
+      "slots": []
+    }
+  ]
+}
