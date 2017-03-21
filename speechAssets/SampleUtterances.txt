@@ -1,6 +1,10 @@
 HelloIntent Hello
+ConnectIntent connect dashboard
+ConnectIntent connect to server
+ConnectIntent connect client
 ChannelIntent status for channel {channel}
 ChannelIntent channel {channel} status
-ConnectIntent Connect
-ChannelOnIntent Switch on channel {channel}
-ChannelOffIntent Switch off channel {channel}
+ChannelOnIntent switch on channel {channel}
+ChannelOnIntent switch on the channel {channel}
+ChannelOffIntent switch off channel {channel}
+ChannelOffIntent switch off the channel {channel}

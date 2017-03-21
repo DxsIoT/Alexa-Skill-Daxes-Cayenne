@@ -14,6 +14,14 @@ var Client = new Cayenne.Client(options);
 
 var connected = false;
 
+app.launch(function(request, response) {
+  //response.shouldEndSession(false);
+  return response.card("Daxes Cayenne Skill", "This is a Test Skill for manage a Cayenne dashboard")
+  				 .say("Hello, this is a Test Skill for manage a Cayenne dashboard")
+  				 .shouldEndSession(false)
+  				 .send();  
+});
+
 app.intent("HelloIntent", 
 	{
 		"slots": {},
@@ -25,6 +33,8 @@ app.intent("HelloIntent",
 	}
 );
 
+var channels_available = ['ch1','ch2','ch3','ch4','ch5'];
+
 app.intent("ChannelIntent", 
 	{
 		"slots": { "channel" : "AMAZON.NUMBER"},
@@ -34,24 +44,44 @@ app.intent("ChannelIntent",
 		]
 	},
 	function(request, response){
-		var channel = request.slot("channel");
-		console.log('channel: ' + channel);
-		response.say("You have selected channel number " + channel);
+		var number = request.slot("channel");
+		var channel = 'ch' + number;
+		if( channels_available.indexOf(channel) < 0 ){
+			return response.say("Channel " + number + " is not available")
+						   .shouldEndSession(false)
+						   .send();
+		}else{
+			console.log('channel: ' + channel);
+			return response.say("You have selected channel number " + channel)
+						   .shouldEndSession(false)
+						   .send();
+		}		
 	}
 );
 
 app.intent("ChannelOnIntent",
 	{
 		"slots": { "channel" : "AMAZON.NUMBER"},
-		"utterances": ["Switch On Channel {channel}"]
+		"utterances": ["switch on Channel {channel}", "switch on the Channel {channel}"]
 	},
 	function(request,response){
 		if(connected){
-			var channel = request.slot("channel");
-			Client.Channel('ch' + channel).switchOn();
-			response.say("Channel " + channel + " switched on.")
+			var number = request.slot("channel");
+			var channel = 'ch' + number;
+			if( channels_available.indexOf(channel) < 0 ){
+				return response.say("Channel " + number + " is not available")
+							   .shouldEndSession(false)
+							   .send();
+			}else{
+				Client.Channel(channel).switchOn();
+				return response.say("Channel " + number + " was switched on")
+							   .shouldEndSession(false)
+							   .send();
+			}					
 		}else{
-			response.say("Client is not connected");
+			return response.say("Client is not connected")
+						   .shouldEndSession(false)
+						   .send();
 		}
 	}
 );
@@ -59,15 +89,26 @@ app.intent("ChannelOnIntent",
 app.intent("ChannelOffIntent",
 	{
 		"slots": { "channel" : "AMAZON.NUMBER"},
-		"utterances": ["Switch Off Channel {channel}"]
+		"utterances": ["switch off Channel {channel}", "switch off the Channel {channel}"]
 	},
 	function(request,response){
 		if(connected){
-			var channel = request.slot("channel");
-			Client.Channel('ch' + channel).switchOff();
-			response.say("Channel " + channel + " switched off.")
+			var number = request.slot("channel");
+			var channel = 'ch' + number;
+			if( channels_available.indexOf(channel) < 0 ){
+				return response.say("Channel " + number + " is not available.")
+							   .shouldEndSession(false)
+							   .send();
+			}else{
+				Client.Channel(channel).switchOff();
+				return response.say("Channel " + number + " was switched off.")
+							   .shouldEndSession(false)
+							   .send();
+			}					
 		}else{
-			response.say("Client is not connected");
+			return response.say("Client is not connected")
+						   .shouldEndSession(false)
+						   .send();
 		}
 	}
 );
@@ -76,11 +117,14 @@ app.intent("ChannelOffIntent",
 app.intent("ConnectIntent",
 	{
 		"slots": {},
-		"utterances": ["Connect"]
+		"utterances": ["connect dashboard","connect to server","connect client"]
 	},
 	function(request,response){
 		Client.connect();
 		connected = true;
+		return response.say("Client connected")
+					   .shouldEndSession(false)
+					   .send();
 	}
 );
 
